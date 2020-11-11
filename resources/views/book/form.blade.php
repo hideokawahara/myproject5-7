@@ -1,7 +1,3 @@
-<head>
-    <title>Laravel Sample</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-</head>
 <div class="container ops-main">
     <div class="row">
         <div class="col-md-6">
@@ -10,9 +6,13 @@
     </div>
     <div class="row">
         <div class="col-md-8 col-md-offset-1">
+            @include('book/message')
+            @if($target == 'store')
+            <form action="/book" method="post">
+            @elseif($target == 'update')
             <form action="/book/{{ $book->id }}" method="post">
-                <!-- updateメソッドにはPUTメソッドがルーティングされているのでPUTにする -->
                 <input type="hidden" name="_method" value="PUT">
+            @endif
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="form-group">
                     <label for="name">書籍名</label>
